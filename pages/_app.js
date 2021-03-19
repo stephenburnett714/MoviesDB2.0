@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }) {
   const [moviesList, setMoviesList] = useState([]);
   const [detailIndex, setDetailIndex] = useState(null);
   const [searchIncrement, setSearchIncrement] = useState(0)
+  const [currentMovie, setCurrentMovie] = useState()
 
 
   const increment = () => {
@@ -18,7 +19,17 @@ function MyApp({ Component, pageProps }) {
     setTimeout(() => {setSearchIncrement((amount) => amount + 1)}, 250)
   }
 
-  
+  const removeQuotes = (str) => {
+    str = str.replace(/^"|"$/g, '')
+    return str
+  }
+
+  function thousands_separators(num) {
+    var num_parts = num.toString().split(".");
+    num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return num_parts.join(".");
+
+}
 
   return (
     <div>
@@ -46,6 +57,10 @@ function MyApp({ Component, pageProps }) {
       searchIncrement={searchIncrement}
       previousSearch={previousSearch}
       increment={increment}
+      removeQuotes={removeQuotes}
+      currentMovie={currentMovie}
+      setCurrentMovie={setCurrentMovie}
+      thousands_separators={thousands_separators}
       />
 
       <Footer />
