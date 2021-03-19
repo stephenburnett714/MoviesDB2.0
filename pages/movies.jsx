@@ -1,7 +1,75 @@
-const movies = () => {
-    return (
-        <div>Movies</div>
-    );
+import {Grid, Card, CardMedia, CardActionArea, Typography} from "@material-ui/core";
+import { useEffect, useState } from "react";
+import { getSearchedInfo } from "./api/apihelper";
+import moment from 'moment'
+
+export default function movies(props) {
+  const posterSize = "w200";
+  console.log(props);
+
+  async function fetchMovieData() {
+    try {
+    const movieData = await getSearchedInfo("movie", props.searchQueary)
+    props.setMoviesList(movieData)
+    } catch (e) {
+      return 'caught';
+    }
+  }
+
+  useEffect(() => {
+    fetchMovieData();
+  }, [props.searchIncrement]);
+
+
+
+  return (
+    <div>
+      <Typography className="capital" style={{ paddingTop: 20 }} align="center">Search Results for {props.searchQueary}</Typography>
+      {props.moviesList && props.moviesList.results ? (
+        <div style={{ paddingTop: 20, paddingBottom: 20 }}>
+          <Grid py={4} container direction="row" spacing="2" justify="center">
+            {props.moviesList && props.moviesList.results.map((movie, index) => (
+              <Grid
+              container
+                direction="column"
+                item
+                xs={12}
+                sm={4}
+                md={3}
+                xl={2}
+                key={index}
+                alignItems="center"
+                justify="center"
+              >
+                <Card container >
+                  <Grid justify="center">
+                    
+                  {movie.poster_path ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/${posterSize}${movie.poster_path}`}
+                      alt=""
+                    />
+                  ) : (
+                    <img src="/images/ni2x3.png" alt="" />
+                  )}
+                </Grid>
+
+                <Typography align="center">{movie.title}</Typography>
+                <Typography align="center">{movie.release_date ? `Release Year: ${moment(movie.release_date).format('YYYY')}` : "Release Year: Unknown"}</Typography>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+          
+        </div>
+      ) : (
+        <div></div>
+      )}
+    </div>
+  );
 }
 
-export default movies;
+export async function getServerSideProps({ query }) {
+  let searchQuery = query.data;
+  return { props: { searchQueary: searchQuery } };
+}
