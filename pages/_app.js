@@ -9,9 +9,14 @@ function MyApp({ Component, pageProps }) {
   const [search, setSearch] = useState("")
   const [previousSearch, setPreviousSearch] = useState()
   const [moviesList, setMoviesList] = useState([]);
+  const [showsList, setShowsList] = useState([]);
+  const [peopleList, setPeopleList] = useState([]);
   const [detailIndex, setDetailIndex] = useState(null);
   const [searchIncrement, setSearchIncrement] = useState(0)
   const [currentMovie, setCurrentMovie] = useState()
+  const [currentShow, setCurrentShow] = useState()
+  const [currentPerson, setCurrentPerson] = useState()
+  
 
 
   const increment = () => {
@@ -52,6 +57,8 @@ function MyApp({ Component, pageProps }) {
       setSearch={setSearch}
       moviesList={moviesList}
       setMoviesList={setMoviesList}
+      showsList={showsList}
+      setShowsList={setShowsList}
       detailIndex={detailIndex}
       setDetailIndex={setDetailIndex}
       searchIncrement={searchIncrement}
@@ -61,6 +68,12 @@ function MyApp({ Component, pageProps }) {
       currentMovie={currentMovie}
       setCurrentMovie={setCurrentMovie}
       thousands_separators={thousands_separators}
+      currentShow={currentShow}
+      setCurrentShow={setCurrentShow}
+      peopleList={peopleList}
+      setPeopleList={setPeopleList}
+      currentPerson={currentPerson}
+      setCurrentPerson={setCurrentPerson}
       />
 
       <Footer />

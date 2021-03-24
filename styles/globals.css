@@ -2,3 +2,15 @@
   text-transform: capitalize;
 }
 
+.mw-third {
+max-width: 50vw;
+height: auto;
+}
+
+@media only screen and (min-width: 800px) {
+.mw-third {
+  max-width: 30vw;
+  height: auto;
+  }
+}
+

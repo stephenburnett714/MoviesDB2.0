@@ -13,7 +13,7 @@ export default function movies(props) {
     const movieData = await getSearchedInfo("movie", props.searchQueary)
     props.setMoviesList(movieData)
     } catch (e) {
-      return 'caught';
+      return 'error';
     }
   }
 

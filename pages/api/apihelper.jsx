@@ -25,7 +25,7 @@ export const getTvMoviePerson = async (viewType, id) => {
   }
 
 export const getPersonAndCredits = async (id) => {
-  const res = await axios.get(`${base}person/${id}/?api_key=${token}&append_to_response=movie_credits,tv_credits`)
+  const res = await axios.get(`${base}person/${id}?api_key=${token}&append_to_response=movie_credits,tv_credits`)
   return res.data
 }
 
