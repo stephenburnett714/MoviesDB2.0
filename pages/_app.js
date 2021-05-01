@@ -5,6 +5,7 @@ import {useState} from "react"
 import "../styles/globals.css"
 
 function MyApp({ Component, pageProps }) {
+
   const [selectedEntry, setSelectedEntry] = useState("movies");
   const [search, setSearch] = useState("")
   const [previousSearch, setPreviousSearch] = useState()
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }) {
   const [currentMovie, setCurrentMovie] = useState()
   const [currentShow, setCurrentShow] = useState()
   const [currentPerson, setCurrentPerson] = useState()
+  const [page, setPage] = useState()
   
 
 
@@ -33,8 +35,7 @@ function MyApp({ Component, pageProps }) {
     var num_parts = num.toString().split(".");
     num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return num_parts.join(".");
-
-}
+  }
 
   return (
     <div>
@@ -74,6 +75,8 @@ function MyApp({ Component, pageProps }) {
       setPeopleList={setPeopleList}
       currentPerson={currentPerson}
       setCurrentPerson={setCurrentPerson}
+      page={page}
+      setPage={setPage}
       />
 
       <Footer />

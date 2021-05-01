@@ -2,7 +2,8 @@ import Link from "next/link"
 import {useEffect} from 'react'
 import {getShowAndCredits} from "../api/apihelper"
 import moment from "moment"
-import { Grid, Container, Table, TableHead, TableCell, TableBody,TableRow } from '@material-ui/core';
+import { Accordion, AccordionSummary, AccordionDetails, Grid, Container, Table, Typography, TableHead, TableCell, TableBody,TableRow } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
 export default function show(props) {
@@ -36,6 +37,12 @@ export default function show(props) {
             <Grid item>{overview}</Grid>
             </Grid>
             <Grid container direction="column" >
+            <Accordion>
+            <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}>
+            <Typography >Show Cast</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
             <Table>
             <TableHead>
                 <TableRow>
@@ -44,6 +51,7 @@ export default function show(props) {
                 <TableCell>Role</TableCell>
                 </TableRow>
             </TableHead>
+
             <TableBody>
                 
                 {credits.cast.map((cast) => (
@@ -60,7 +68,11 @@ export default function show(props) {
                     </Link>
                 ))}
                 </TableBody>
+    
+                
             </Table>
+            </AccordionDetails>
+                </Accordion>
             </Grid>
             </Container>
         );

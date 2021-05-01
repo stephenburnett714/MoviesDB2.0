@@ -2,8 +2,20 @@ import Link from "next/link"
 import {useEffect} from 'react'
 import {getMovieAndCredits} from "../api/apihelper"
 import moment from "moment"
-import { Grid, Container, Table, TableHead, TableCell, TableBody,TableRow } from '@material-ui/core';
-// import { maxWidth } from  '@material-ui/system'
+import {
+    Accordion,
+    AccordionSummary,
+    AccordionDetails,
+    Grid,
+    Container,
+    Table,
+    Typography,
+    TableHead,
+    TableCell,
+    TableBody,
+    TableRow,
+  } from "@material-ui/core";
+  import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 export default function movie(props) {
 
@@ -27,24 +39,30 @@ let renderData = () => {
     return (
         <Container>
         <Grid container direction="column" justify="center" alignItems="center">
-            <Grid>{title ? title : original_title}</Grid>
+            <Grid ><Typography variant="h3">{title ? title : original_title}</Typography></Grid>
             <Grid item>{poster_path ? 
                 (<img className="mw-third" src={`https://image.tmdb.org/t/p/${moviePosterSize}${poster_path}`}/>) 
                 : 
                 (<img className="mw-third" src="/images/ni2x3.png" alt="" />)}
             </Grid>
 
-        <Grid item>{`Budget: ${budget ? props.thousands_separators(budget) : "N/A"}`}</Grid>
+        <Grid item>{`Budget: $${budget ? props.thousands_separators(budget) : "N/A"}`}</Grid>
         <Grid>{moment(release_date).format("MMMM DD, YYYY")}</Grid>
         <Grid item>{overview}</Grid>
         </Grid>
+        <div style={{ paddingTop: 20,  paddingBottom: 20}}>
         <Grid container direction="column" >
+        <Accordion>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>View Cast ({credits.cast.length})</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
             <Table>
             <TableHead>
                 <TableRow>
                 <TableCell></TableCell>
-                <TableCell>Cast</TableCell>
-                <TableCell>Role</TableCell>
+                <TableCell ><Typography variant="h5">Cast</Typography></TableCell>
+                <TableCell ><Typography variant="h5">Role</Typography></TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -64,7 +82,10 @@ let renderData = () => {
                 ))}
                 </TableBody>
             </Table>
+            </AccordionDetails>
+            </Accordion>
             </Grid>
+            </div>
         </Container>
     );
 }

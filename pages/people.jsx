@@ -1,4 +1,5 @@
 import {Grid, Card, CardMedia, CardActionArea, Typography} from "@material-ui/core";
+import Pagination from '@material-ui/lab/Pagination';
 import { useEffect } from "react";
 import { getSearchedInfo } from "./api/apihelper";
 import moment from 'moment'
@@ -18,11 +19,11 @@ export default function people(props) {
         return 'error';
       }
     }
+
   
     useEffect(() => {
       fetchPeopleData();
     }, [props.searchIncrement]);
-
 
 
 const renderData = () => {
@@ -66,6 +67,7 @@ const renderData = () => {
               </Grid>
             ))}
           </Grid>
+          <Pagination count={Math.ceil(props.peopleList.total_results/20)} />
           </div>
           </div>
     )
